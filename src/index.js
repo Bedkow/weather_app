@@ -35,29 +35,45 @@ const searchWeatherByCity = (event) => {
 			weather3.classList.add("weather3", "col-sm-4");
 
 			//create div container for next 3 days
-			let daysContainer = document.createElement("div");
-			daysContainer.classList.add(
+			let upcomingDaysContainer = document.createElement("div");
+			upcomingDaysContainer.classList.add(
 				"container",
 				"row",
 				"upcoming-days-container"
 			);
 
 			//append todays weather as child
-			weatherToday.innerHTML = `<h2>${weatherData.current.condition.text}</h2>`;
+			weatherToday.innerHTML = `<div class="border border-dark border-3">
+			<h2>${weatherData.current.condition.text}</h2>
+			<img src="${weatherData.current.condition.icon}">
+			<div>${weatherData.current.temp_c} &#8451;</div>
+			</div>`;
 			document.querySelector("#results").appendChild(weatherToday);
 
 			//append next days container as sibling
-			document.querySelector(".weather-today").after(daysContainer);
+			document.querySelector(".weather-today").after(upcomingDaysContainer);
 
 			//append next 3 days as children to container
 
-			weather1.innerHTML = "E";
+			weather1.innerHTML = `<div class="border border-dark border-3">
+			<h2>${weatherData.forecast.forecastday[0].day.condition.text}</h2>
+			<img src="${weatherData.forecast.forecastday[0].day.condition.icon}">
+			<div>${weatherData.forecast.forecastday[0].day.avgtemp_c} &#8451;</div>
+			</div>`;
 			document.querySelector(".upcoming-days-container").appendChild(weather1);
 
-			weather2.innerHTML = "S";
+			weather2.innerHTML = `<div class="border border-dark border-3">
+			<h2>${weatherData.forecast.forecastday[1].day.condition.text}</h2>
+			<img src="${weatherData.forecast.forecastday[1].day.condition.icon}">
+			<div>${weatherData.forecast.forecastday[1].day.avgtemp_c} &#8451;</div>
+			</div>`;
 			document.querySelector(".upcoming-days-container").appendChild(weather2);
 
-			weather3.innerHTML = "(T)";
+			weather3.innerHTML = `<div class="border border-dark border-3">
+			<h2>${weatherData.forecast.forecastday[2].day.condition.text}</h2>
+			<img src="${weatherData.forecast.forecastday[2].day.condition.icon}">
+			<div>${weatherData.forecast.forecastday[2].day.avgtemp_c} &#8451;</div>
+			</div>`;
 			document.querySelector(".upcoming-days-container").appendChild(weather3);
 		})
 		.catch((err) => {
