@@ -11,7 +11,7 @@ const searchWeatherByCity = (event) => {
 	let query = document.querySelector("#city-search-input").value;
 
 	fetch(
-		`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${query}&days=3&aqi=yes&alerts=no`
+		`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${query}&days=3&aqi=no&alerts=no`
 	)
 		.then((response) => response.json())
 		.then((data) => {
@@ -44,6 +44,7 @@ const searchWeatherByCity = (event) => {
 
 			//append todays weather as child
 			weatherToday.innerHTML = `<div class="border border-dark border-3">
+			<h2>Current</h2>
 			<h2>${weatherData.current.condition.text}</h2>
 			<img src="${weatherData.current.condition.icon}">
 			<div>${weatherData.current.temp_c} &#8451;</div>
@@ -55,7 +56,15 @@ const searchWeatherByCity = (event) => {
 
 			//append next 3 days as children to container
 
+			/// REWRITE THIS MESS TO DRY
+
 			weather1.innerHTML = `<div class="border border-dark border-3">
+			<h2>${new Date(weatherData.forecast.forecastday[0].date).toLocaleString(
+				"en-us",
+				{
+					weekday: "long",
+				}
+			)}</h2>
 			<h2>${weatherData.forecast.forecastday[0].day.condition.text}</h2>
 			<img src="${weatherData.forecast.forecastday[0].day.condition.icon}">
 			<div>${weatherData.forecast.forecastday[0].day.avgtemp_c} &#8451;</div>
@@ -63,6 +72,12 @@ const searchWeatherByCity = (event) => {
 			document.querySelector(".upcoming-days-container").appendChild(weather1);
 
 			weather2.innerHTML = `<div class="border border-dark border-3">
+			<h2>${new Date(weatherData.forecast.forecastday[1].date).toLocaleString(
+				"en-us",
+				{
+					weekday: "long",
+				}
+			)}</h2>
 			<h2>${weatherData.forecast.forecastday[1].day.condition.text}</h2>
 			<img src="${weatherData.forecast.forecastday[1].day.condition.icon}">
 			<div>${weatherData.forecast.forecastday[1].day.avgtemp_c} &#8451;</div>
@@ -70,6 +85,12 @@ const searchWeatherByCity = (event) => {
 			document.querySelector(".upcoming-days-container").appendChild(weather2);
 
 			weather3.innerHTML = `<div class="border border-dark border-3">
+			<h2>${new Date(weatherData.forecast.forecastday[2].date).toLocaleString(
+				"en-us",
+				{
+					weekday: "long",
+				}
+			)}</h2>
 			<h2>${weatherData.forecast.forecastday[2].day.condition.text}</h2>
 			<img src="${weatherData.forecast.forecastday[2].day.condition.icon}">
 			<div>${weatherData.forecast.forecastday[2].day.avgtemp_c} &#8451;</div>
@@ -78,6 +99,9 @@ const searchWeatherByCity = (event) => {
 		})
 		.catch((err) => {
 			console.error(err);
+			if (err) {
+				alert("Somerting went wrong. Use only English characters!");
+			}
 		});
 };
 
