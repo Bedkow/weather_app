@@ -37,14 +37,15 @@ const searchWeatherByCity = (event) => {
 			//create div container for next 3 days
 			let upcomingDaysContainer = document.createElement("div");
 			upcomingDaysContainer.classList.add(
-				"container",
+				"container-fluid",
 				"row",
-				"upcoming-days-container"
+				"upcoming-days-container",
+				"text-center"
 			);
 
 			//append todays weather as child
-			weatherToday.innerHTML = `<div class="border border-dark border-3">
-			<h2>Current</h2>
+			weatherToday.innerHTML = `<div class="text-center mb-3">
+			<h2>Currently</h2>
 			<h2>${weatherData.current.condition.text}</h2>
 			<img src="${weatherData.current.condition.icon}">
 			<div>${weatherData.current.temp_c} &#8451;</div>
@@ -58,20 +59,20 @@ const searchWeatherByCity = (event) => {
 
 			/// REWRITE THIS MESS TO DRY
 
-			weather1.innerHTML = `<div class="border border-dark border-3">
-			<h2>${new Date(weatherData.forecast.forecastday[0].date).toLocaleString(
+			weather1.innerHTML = `<div>
+			<h2>Today (${new Date(weatherData.forecast.forecastday[0].date).toLocaleString(
 				"en-us",
 				{
 					weekday: "long",
 				}
-			)}</h2>
+			)})</h2>
 			<h2>${weatherData.forecast.forecastday[0].day.condition.text}</h2>
 			<img src="${weatherData.forecast.forecastday[0].day.condition.icon}">
 			<div>${weatherData.forecast.forecastday[0].day.avgtemp_c} &#8451;</div>
 			</div>`;
 			document.querySelector(".upcoming-days-container").appendChild(weather1);
 
-			weather2.innerHTML = `<div class="border border-dark border-3">
+			weather2.innerHTML = `<div>
 			<h2>${new Date(weatherData.forecast.forecastday[1].date).toLocaleString(
 				"en-us",
 				{
@@ -84,7 +85,7 @@ const searchWeatherByCity = (event) => {
 			</div>`;
 			document.querySelector(".upcoming-days-container").appendChild(weather2);
 
-			weather3.innerHTML = `<div class="border border-dark border-3">
+			weather3.innerHTML = `<div>
 			<h2>${new Date(weatherData.forecast.forecastday[2].date).toLocaleString(
 				"en-us",
 				{
