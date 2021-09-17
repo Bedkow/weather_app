@@ -1,15 +1,7 @@
-# 🚀 Welcome to your new awesome project!
+A super simple web weather app created to exercise Bootstrap basics and refresh the basics of promise handling in Vanilla JS
 
-This project has been created using **webpack-cli**, you can now run
+To use enter a city name in English and click "Submit"
 
-```
-npm run build
-```
+Built with JavaScript, Bootstrap 5, WeatherAPI
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
+demo: https://web-app-29fa7.web.app/
